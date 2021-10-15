@@ -79,15 +79,55 @@ public class LoginMenuController {
 		}
 		System.out.println("Please enter a password.");
 		String password = scan.nextLine();
-		loginService.register(username,password);
-		System.out.println("Please give us your first name.");
+		System.out.println("Please give us your first name in lower case.");
 		String firstName = scan.nextLine();
-		System.out.println("Please give us your last name.");
+		for(char ch:firstName.toCharArray()) {
+			if(firstName.toCharArray().length<=1) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+			else if(ch<'a'||ch>'z') {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+		}
+		System.out.println("Please give us your last name in lower case.");
 		String lastName = scan.nextLine();
+		for(char ch:lastName.toCharArray()) {
+			if(lastName.toCharArray().length<=1) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+			else if(ch<'a'||ch>'z') {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+		}
 		System.out.println("Please give us your phone number.");
 		String phoneNumber = scan.nextLine();
+		for(char ch:phoneNumber.toCharArray()) {
+			if(!(phoneNumber.toCharArray().length==10)) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+			else if(Character.getNumericValue(ch)<0||Character.getNumericValue(ch)>9) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+		}
 		System.out.println("Please give us your birth date.");
 		String birthDate = scan.nextLine();
+		for(char ch:birthDate.toCharArray()) {
+			if(!(birthDate.toCharArray().length==8)) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+			else if(Character.getNumericValue(ch)<0||Character.getNumericValue(ch)>9) {
+				System.out.println("Not a valid Input. Try again.");
+				register();
+			}
+		}
+		loginService.register(username,password);
 		loginService.userInfo(username,firstName,lastName,phoneNumber,birthDate);
 		System.out.println("Account successfully created!");
 
