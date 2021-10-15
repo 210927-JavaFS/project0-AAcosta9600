@@ -21,9 +21,12 @@ public class LoginService {
 	}
 
 	public User register(String username, String password) {
-		return loginRepository.register(username, password);
+		char [] encryptedPassword = password.toCharArray();
+		for(int i=0;i<encryptedPassword.length;i++) {
+			encryptedPassword[i] +=3;
+		}
+		return loginRepository.register(username, String.valueOf(encryptedPassword));
 		
 	}
-		
-	
+		 
 }

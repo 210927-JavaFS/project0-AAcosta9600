@@ -16,16 +16,18 @@ public class CustomerController {
 		System.out.println("2) Withdraw");
 		System.out.println("3) Deposit");
 		System.out.println("4) Transfer");
+		System.out.println("5) See Acounts");
 		System.out.println("6) Logout");
 		String response = scan.nextLine();
 		while (!response.equals("6")) {
 			switch (response) {
 			case "1":
-				approvalList();
+				openAccount();
 				System.out.println("1) Open Account");
 				System.out.println("2) Withdraw");
 				System.out.println("3) Deposit");
 				System.out.println("4) Transfer");
+				System.out.println("5) See Acounts");
 				System.out.println("6) Logout");
 				response = scan.nextLine();
 				break;
@@ -35,6 +37,7 @@ public class CustomerController {
 				System.out.println("2) Withdraw");
 				System.out.println("3) Deposit");
 				System.out.println("4) Transfer");
+				System.out.println("5) See Acounts");
 				System.out.println("6) Logout");
 				response = scan.nextLine();
 				break;
@@ -44,6 +47,7 @@ public class CustomerController {
 				System.out.println("2) Withdraw");
 				System.out.println("3) Deposit");
 				System.out.println("4) Transfer");
+				System.out.println("5) See Acounts");
 				System.out.println("6) Logout");
 				response = scan.nextLine();
 				break;
@@ -53,12 +57,32 @@ public class CustomerController {
 				System.out.println("2) Withdraw");
 				System.out.println("3) Deposit");
 				System.out.println("4) Transfer");
+				System.out.println("5) See Acounts");
+				System.out.println("6) Logout");
+				response = scan.nextLine();
+				break;
+			case "5":
+				seeAccounts();
+				System.out.println("1) Open Account");
+				System.out.println("2) Withdraw");
+				System.out.println("3) Deposit");
+				System.out.println("4) Transfer");
+				System.out.println("5) See Acounts");
 				System.out.println("6) Logout");
 				response = scan.nextLine();
 				break;
 
 			}
 		}
+	}
+	private static void seeAccounts() {
+		System.out.println("Please enter your username to see all of your accoutns.");
+		String username = scan.nextLine();
+		List<Account> accounts = managerService.seeAccounts(username);
+		for(Account a:accounts) {
+			System.out.println(a.toString());
+		}
+		
 	}
 	private static void transfer() {
 		System.out.println("Input the account you would like to withdraw from.");
@@ -89,22 +113,13 @@ public class CustomerController {
 		
 	}
 
-	private static void approvalList() {
-		List<Account> approvalList = managerService.getApprovalList();
-		for(Account a:approvalList) {
-			System.out.println(a.toString());
-		}
-		System.out.println("Please enter the account number of the account you would like to approve or deny.");
-		String account = scan.nextLine();
-		System.out.println("Please enter 'Approve' or 'Deny'");
-		String approval = scan.nextLine();
-		managerService.approve(account,approval);
-		if(managerService.approve(account, approval)) {
-			System.out.println("Change made.");
-		}
-		else {
-			System.out.println("Something went wrong please try again.");
-		}
+	private static void openAccount() {
+		
+		System.out.println("Please enter your username to create your account.");
+		String username = scan.nextLine();
+		managerService.createAccount(username);
+		System.out.println("Thank you. An associate will approve or deny your account within 3 business days.");
+
 		
 	}
 

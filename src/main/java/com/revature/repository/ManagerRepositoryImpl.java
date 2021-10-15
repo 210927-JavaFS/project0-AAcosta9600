@@ -115,14 +115,59 @@ public class ManagerRepositoryImpl implements ManagerRepository{
 			statement.execute();
 
 
-
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return;
 
+	}
+
+	@Override
+	public Account createAccount(String username) {
+		try (Connection conn = ConnectionUtils.getConnection()) { 
+			String sql = "INSERT INTO accounts (username, cash, approval) VALUES ( ?, 0.00, FALSE);";
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, username);
+
+			statement.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Account> seeAccountsByUsername(String username) {
+		try (Connection conn = ConnectionUtils.getConnection()) { 
+			String sql = "SELECT * FROM accounts WHERE username = ?;";
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, username);
+
+			ResultSet result = statement.executeQuery();
+
+			List<Account> list = new ArrayList<>();
+
+			while (result.next()) {
+				Account account = new Account();
+				account.setAccountNumber(result.getInt("account_number"));
+				account.setUsername(result.getString("username"));
+				account.setCash(result.getInt("cash"));
+				account.setApproval(result.getBoolean("approval"));
+
+				list.add(account);
+			}
+
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

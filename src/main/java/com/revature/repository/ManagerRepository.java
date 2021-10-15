@@ -11,5 +11,7 @@ public interface ManagerRepository {
 	public boolean cancel(String account);
 	public int getCashByAccount(String account);
 	public void update(String account, int balance);
+	public Account createAccount(String username);
+	public List<Account> seeAccountsByUsername(String username);
 	
 }

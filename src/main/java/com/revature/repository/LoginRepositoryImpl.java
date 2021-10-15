@@ -37,8 +37,11 @@ public class LoginRepositoryImpl implements LoginRepository{
 			String sql = "SELECT * FROM users WHERE passcode =?;";
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-
-			statement.setString(1, password);
+			char [] encryptedPassword = password.toCharArray();
+			for(int i=0;i<encryptedPassword.length;i++) {
+				encryptedPassword[i] +=3;
+			}
+			statement.setString(1, String.valueOf(encryptedPassword));
 
 			ResultSet result = statement.executeQuery();
 			return result.next();

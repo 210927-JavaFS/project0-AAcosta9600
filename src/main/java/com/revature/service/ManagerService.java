@@ -60,4 +60,15 @@ public class ManagerService {
 		return false;
 	}
 
+	public Account createAccount(String username) {
+		return managerRepository.createAccount(username);
+		
+	}
+
+	public List<Account> seeAccounts(String username) {
+		return managerRepository.seeAccountsByUsername(username);
+		
+	}
+
+
 }
