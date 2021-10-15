@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import com.revature.models.CustomerInfo;
 import com.revature.models.User;
 import com.revature.repository.LoginRepository;
 import com.revature.repository.LoginRepositoryImpl;
@@ -26,6 +27,11 @@ public class LoginService {
 			encryptedPassword[i] +=3;
 		}
 		return loginRepository.register(username, String.valueOf(encryptedPassword));
+		
+	}
+
+	public CustomerInfo userInfo(String username, String firstName, String lastName, String phoneNumber, String birthDate) {
+		return loginRepository.setUserInfo(username, firstName, lastName, phoneNumber, birthDate);
 		
 	}
 		 

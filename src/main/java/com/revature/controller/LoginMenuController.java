@@ -17,10 +17,10 @@ public class LoginMenuController {
 		System.out.println("2) Teller");
 		System.out.println("3) Customer");
 		System.out.println("4) Register for new account");
-		System.out.println("5) Exit");
+		System.out.println("6) Exit");
 		String response = scan.nextLine();
 
-		while (!response.equals("5")) {
+		while (!response.equals("6")) {
 			switch (response) {
 			case "1":
 				managerLogin();
@@ -29,7 +29,7 @@ public class LoginMenuController {
 				System.out.println("2) Teller");
 				System.out.println("3) Customer");
 				System.out.println("4) Register for new account");
-				System.out.println("5) Exit");
+				System.out.println("6) Exit");
 				response = scan.nextLine();
 				break;
 			case "2":
@@ -39,7 +39,7 @@ public class LoginMenuController {
 				System.out.println("2) Teller");
 				System.out.println("3) Customer");
 				System.out.println("4) Register for new account");
-				System.out.println("5) Exit");
+				System.out.println("6) Exit");
 				response = scan.nextLine();
 				break;
 			case "3":
@@ -49,7 +49,7 @@ public class LoginMenuController {
 				System.out.println("2) Teller");
 				System.out.println("3) Customer");
 				System.out.println("4) Register for new account");
-				System.out.println("5) Exit");
+				System.out.println("6) Exit");
 				response = scan.nextLine();
 				break;
 			case "4":
@@ -59,7 +59,7 @@ public class LoginMenuController {
 				System.out.println("2) Teller");
 				System.out.println("3) Customer");
 				System.out.println("4) Register for new account");
-				System.out.println("5) Exit");
+				System.out.println("6) Exit");
 				response = scan.nextLine();
 				break;
 			}
@@ -68,9 +68,9 @@ public class LoginMenuController {
 	}
 
 	private void register() {
-		System.out.println("Please enter a username. You can also input 5 to cancel.");
+		System.out.println("Please enter a username. You can also input 6 to cancel.");
 		String username = scan.nextLine();
-		if(username.equals("5")) {
+		if(username.equals("6")) {
 			welcomeMenu();
 		}
 		else if(loginService.checkUsername(username)) {
@@ -80,16 +80,25 @@ public class LoginMenuController {
 		System.out.println("Please enter a password.");
 		String password = scan.nextLine();
 		loginService.register(username,password);
+		System.out.println("Please give us your first name.");
+		String firstName = scan.nextLine();
+		System.out.println("Please give us your last name.");
+		String lastName = scan.nextLine();
+		System.out.println("Please give us your phone number.");
+		String phoneNumber = scan.nextLine();
+		System.out.println("Please give us your birth date.");
+		String birthDate = scan.nextLine();
+		loginService.userInfo(username,firstName,lastName,phoneNumber,birthDate);
 		System.out.println("Account successfully created!");
 
 	}
 
 	private void customerLogin() {
-		System.out.println("Enter 5 to cancel and go back.");
+		System.out.println("Enter 6 to cancel and go back.");
 		System.out.println("Please enter your username.");
 		String username = scan.nextLine();
 
-		while (!(username.equals("5"))) {
+		while (!(username.equals("6"))) {
 			System.out.println("Please enter your password.");
 			String password = scan.nextLine();
 
@@ -108,11 +117,11 @@ public class LoginMenuController {
 	}
 
 	private void tellerLogin() {
-		System.out.println("Enter 5 to cancel and go back.");
+		System.out.println("Enter 6 to cancel and go back.");
 		System.out.println("Please enter your username.");
 		String username = scan.nextLine();
 
-		while (!(username.equals("5"))) {
+		while (!(username.equals("6"))) {
 			System.out.println("Please enter your password.");
 			String password = scan.nextLine();
 
@@ -131,11 +140,11 @@ public class LoginMenuController {
 	}
 
 	private void managerLogin() {
-		System.out.println("Enter 5 to cancel and go back.");
+		System.out.println("Enter 6 to cancel and go back.");
 		System.out.println("Please enter your username.");
 		String username = scan.nextLine();
 
-		while (!(username.equals("5"))) {
+		while (!(username.equals("6"))) {
 			System.out.println("Please enter your password.");
 			String password = scan.nextLine();
 			if ((loginService.checkUsername(username) == false) || !(loginService.checkAdminLevel(username).equals("Manager"))) {
